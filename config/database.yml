@@ -11,16 +11,8 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-# production:
-#   <<: *default
-#   adapter: postgresql
-#   encoding: unicode
-#   url: <%= ENV['DATABASE_URL'] %>
-
 production:
   <<: *default
-  database: hiyari_system_ver2 db
-  username: hiyari-system-ver2
   adapter: postgresql
   encoding: unicode
   url: <%= ENV['DATABASE_URL'] %>
