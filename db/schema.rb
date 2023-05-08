@@ -2,30 +2,26 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_15_004423) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
+ActiveRecord::Schema[7.0].define(version: 2020_06_15_004423) do
   create_table "accidents", force: :cascade do |t|
     t.string "which_accident"
     t.string "reporter"
-    t.datetime "accident_datetime"
+    t.datetime "accident_datetime", precision: nil
     t.string "accident_senior"
     t.string "accident_scene"
-    t.bigint "senior_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "senior_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "accident_floor"
-    t.datetime "accident_time"
+    t.datetime "accident_time", precision: nil
     t.string "department"
     t.string "accident_worker"
     t.string "accident_place"
@@ -38,12 +34,12 @@ ActiveRecord::Schema.define(version: 2020_06_15_004423) do
     t.string "result_comment"
     t.string "measures_comment"
     t.string "change_measures"
-    t.datetime "evaluation_date"
+    t.datetime "evaluation_date", precision: nil
     t.string "evaluation_comment"
     t.integer "measures_result"
     t.string "superior_comment"
-    t.datetime "reporting_date"
-    t.datetime "last_reporting_date"
+    t.datetime "reporting_date", precision: nil
+    t.datetime "last_reporting_date", precision: nil
     t.string "superior_a"
     t.string "superior_b"
     t.string "superior_c"
@@ -85,8 +81,8 @@ ActiveRecord::Schema.define(version: 2020_06_15_004423) do
   create_table "facilities", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
@@ -94,7 +90,7 @@ ActiveRecord::Schema.define(version: 2020_06_15_004423) do
     t.string "provider"
     t.string "image"
     t.string "oauth_token"
-    t.datetime "oauth_expires_at"
+    t.datetime "oauth_expires_at", precision: nil
     t.string "salt"
     t.string "google_secret"
     t.boolean "display", default: true
@@ -105,10 +101,10 @@ ActiveRecord::Schema.define(version: 2020_06_15_004423) do
   end
 
   create_table "senior_workers", force: :cascade do |t|
-    t.bigint "worker_id"
-    t.bigint "senior_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "worker_id"
+    t.integer "senior_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["senior_id"], name: "index_senior_workers_on_senior_id"
     t.index ["worker_id"], name: "index_senior_workers_on_worker_id"
   end
@@ -118,9 +114,9 @@ ActiveRecord::Schema.define(version: 2020_06_15_004423) do
     t.integer "floor"
     t.string "charge_worker"
     t.boolean "using_flg", default: true
-    t.bigint "facility_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "facility_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "senior_name_call"
     t.index ["facility_id"], name: "index_seniors_on_facility_id"
   end
@@ -132,9 +128,9 @@ ActiveRecord::Schema.define(version: 2020_06_15_004423) do
     t.integer "working_floor"
     t.string "charge_senior"
     t.boolean "working_flg", default: true
-    t.bigint "facility_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "facility_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "position"
     t.index ["facility_id"], name: "index_workers_on_facility_id"
   end

@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails',        '5.2.3'
-gem 'pg', '>= 0.18', '< 2.0'
-gem 'rails-i18n', '~> 5.1'
+gem "rails",           "7.0.4"
+# gem "pg", "1.5.3"
+gem 'rails-i18n', '7.0.6'
 gem 'rounding', '~> 1.0', '>= 1.0.1'
 gem 'roo'
 gem 'activerecord-import'
@@ -11,7 +11,7 @@ gem 'will_paginate',           '3.1.7'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bootstrap-sass', '3.3.7'
 gem 'puma',         '3.9.1'
-gem 'sass-rails',   '5.0.6'
+gem "sassc-rails",  "2.1.2"
 gem 'uglifier',     '3.2.0'
 gem 'coffee-rails', '4.2.2'
 gem 'jquery-rails', '4.3.1'
@@ -29,6 +29,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "sqlite3", "1.4.2"
   gem 'web-console',           '3.5.1'
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.0.2'
@@ -38,3 +39,7 @@ group :development do
   gem 'pry-rails' #binding.pry
 end
 
+group :production do
+  gem "pg", "1.3.5"
+  gem "aws-sdk-s3", "1.114.0", require: false
+end
