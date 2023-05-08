@@ -17,6 +17,12 @@ production:
   encoding: unicode
   url: <%= ENV['DATABASE_URL'] %>
 
+  production:
+  <<: *default
+  database: hiyari_system_ver2 db
+  username: hiyari-system-ver2
+  url: <%= ENV['DATABASE_URL'] %>
+
 # PostgreSQL. Versions 9.1 and up are supported.
 # default: &default
 #   adapter: postgresql
