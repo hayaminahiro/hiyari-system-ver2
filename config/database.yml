@@ -13,9 +13,9 @@ test:
 
 production:
   <<: *default
-  database: hiyari-system_production
-  username: hiyari-system
-  password: <%= ENV['HIYARI-SYSTEM_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  url: <%= ENV['DATABASE_URL'] %>
 
 # PostgreSQL. Versions 9.1 and up are supported.
 # default: &default
