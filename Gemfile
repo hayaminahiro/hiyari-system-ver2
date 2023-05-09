@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "3.1.2"
+
 gem "rails",           "7.0.4"
 # gem "pg", "1.5.3"
 gem 'rails-i18n', '7.0.6'
@@ -7,7 +9,7 @@ gem 'rounding', '~> 1.0', '>= 1.0.1'
 gem 'roo'
 gem 'activerecord-import'
 gem 'bcrypt',       '3.1.12'
-gem 'will_paginate',           '3.1.7'
+gem 'will_paginate'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bootstrap-sass', '3.3.7'
 gem 'puma',         '3.9.1'
@@ -31,7 +33,7 @@ end
 group :development do
   gem "sqlite3", "1.4.2"
   gem 'web-console',           '3.5.1'
-  gem 'listen',                '3.1.5'
+  gem 'listen'
   gem 'spring',                '2.0.2'
   gem 'spring-watcher-listen', '2.0.1'
   gem 'better_errors'
