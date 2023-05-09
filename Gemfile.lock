@@ -71,8 +71,8 @@ GEM
     autoprefixer-rails (10.4.13.0)
       execjs (~> 2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.760.0)
-    aws-sdk-core (3.171.1)
+    aws-partitions (1.761.0)
+    aws-sdk-core (3.172.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -147,10 +147,9 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     jwt (2.7.0)
-    listen (3.1.5)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
+    listen (3.8.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.20.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -162,7 +161,6 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.2)
     minitest (5.18.0)
     msgpack (1.7.0)
     multi_json (1.15.0)
@@ -177,10 +175,9 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.14.3)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.14.3-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.14.3-arm64-darwin)
+    nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -258,7 +255,6 @@ GEM
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
     ruby2_keywords (0.0.5)
-    ruby_dep (1.5.0)
     rubyzip (2.3.2)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -310,13 +306,13 @@ GEM
     websocket-extensions (0.1.5)
     wicked_pdf (2.6.3)
       activesupport
-    will_paginate (3.1.7)
+    will_paginate (3.3.1)
     wkhtmltopdf-binary (0.12.6.6)
     zeitwerk (2.6.8)
 
 PLATFORMS
-  ruby
-  universal-darwin-22
+  x86_64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   activerecord-import
@@ -333,7 +329,7 @@ DEPENDENCIES
   google-authenticator-rails
   jbuilder (= 2.6.4)
   jquery-rails (= 4.3.1)
-  listen (= 3.1.5)
+  listen
   omniauth-google-oauth2
   pg
   pry-rails
@@ -350,8 +346,11 @@ DEPENDENCIES
   uglifier (= 3.2.0)
   web-console (= 3.5.1)
   wicked_pdf
-  will_paginate (= 3.1.7)
+  will_paginate
   wkhtmltopdf-binary
 
+RUBY VERSION
+   ruby 3.1.2p20
+
 BUNDLED WITH
-   2.2.15
+   2.3.14
