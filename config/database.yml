@@ -11,11 +11,11 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-# production:
-#   <<: *default
-#   adapter: postgresql
-#   encoding: unicode
-#   url: <%= ENV['DATABASE_URL'] %>
+production:
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  url: <%= ENV['DATABASE_URL'] %>
 
 # PostgreSQL. Versions 9.1 and up are supported.
 # default: &default
