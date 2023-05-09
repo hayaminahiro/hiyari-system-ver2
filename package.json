@@ -1,5 +1,8 @@
 {
   "name": "hiyari-system",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "engines": {
+    "node": "14.x"
+  }
 }

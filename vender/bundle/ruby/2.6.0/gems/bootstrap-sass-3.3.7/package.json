@@ -40,5 +40,8 @@
   "eyeglass": {
     "exports": "eyeglass-exports.js",
     "needs": "^0.7.1"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
