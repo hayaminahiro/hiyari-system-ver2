@@ -16,6 +16,9 @@ production:
   adapter: postgresql
   encoding: unicode
   url: <%= ENV['DATABASE_URL'] %>
+  database: mysite_production
+  username: mysite
+  password: <%= ENV['MYSITE_DATABASE_PASSWORD'] %>
 
 # PostgreSQL. Versions 9.1 and up are supported.
 # default: &default
