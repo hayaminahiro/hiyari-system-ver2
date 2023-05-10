@@ -16,8 +16,8 @@ production:
   adapter: postgresql
   encoding: unicode
   url: <%= ENV['DATABASE_URL'] %>
-  # database: mysite_production
-  # username: mysite
+  database: hiyari_system_ver2_production
+  username: hiyari_system_ver2_production_user
   password: <%= ENV['MYSITE_DATABASE_PASSWORD'] %>
 
 # PostgreSQL. Versions 9.1 and up are supported.
