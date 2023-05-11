@@ -30,3 +30,5 @@
 vendor/bundle
 .DS_Store
 yarn.lock
+
+/config/credentials/development.key

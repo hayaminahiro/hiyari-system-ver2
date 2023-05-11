@@ -21,6 +21,7 @@ gem 'turbolinks',   '5.0.1'
 gem 'jbuilder',     '2.6.4'
 gem 'bootsnap', require: false
 gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
 gem 'dotenv-rails'
 gem 'google-authenticator-rails'
 gem 'wicked_pdf'
