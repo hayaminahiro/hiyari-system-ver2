@@ -20,12 +20,12 @@ class FacilityMfaSessionsController < ApplicationController
   def update
     if @facility.google_authentic?(params[:auth][:mfa_code])
       if @facility.display == true
-        if @facility.update_attributes(display: false)
+        if @facility.update(display: false)
           flash[:success] = "QRコードを非表示に変更しました。"
           redirect_to new_facility_mfa_session_url
         end
       else
-        if @facility.update_attributes(display: true)
+        if @facility.update(display: true)
           flash[:warning] = "QRコードを表示します。スキャン後、非表示にする事をお勧めします。"
           redirect_to new_facility_mfa_session_url
         end
