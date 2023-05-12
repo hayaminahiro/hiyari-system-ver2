@@ -50,7 +50,7 @@ class WorkersController < ApplicationController
   #職員情報更新
   def update_worker
     if worker_valid?((worker_params)[:worker_name], (worker_params)[:senior_ids])
-      @worker.update_attributes(worker_params)
+      @worker.update(worker_params)
       if @worker.sign_name == ""
         flash[:danger] = "サイン名が未入力です。"
       else
@@ -70,7 +70,7 @@ class WorkersController < ApplicationController
 
   #職員退職ボタン
   def retirement
-    if @worker.update_attributes(working_flg: false)
+    if @worker.update(working_flg: false)
       if @worker.working_floor == 6
         flash[:warning] = "管理の「#{@worker.worker_name}」さんを退職へ変更しました。退職者一覧を確認して下さい。"
       elsif @worker.working_floor == 5
@@ -84,7 +84,7 @@ class WorkersController < ApplicationController
 
   #職員再就業ボタン
   def re_employment
-    if @worker.update_attributes(working_flg: true)
+    if @worker.update(working_flg: true)
       if @worker.working_floor == 6
         flash[:info] = "職員「#{@worker.worker_name}」さんを再就業へ変更しました。管理を確認して下さい。"
       elsif @worker.working_floor == 5

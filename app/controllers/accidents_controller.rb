@@ -84,7 +84,7 @@ class AccidentsController < ApplicationController
   end
 
   def update
-    if @accident.update_attributes(accident_params)
+    if @accident.update(accident_params)
       flash[:success] = "ヒヤリ・事故報告書の内容を更新しました。"
       redirect_to facility_senior_accident_path
     else
@@ -101,7 +101,7 @@ class AccidentsController < ApplicationController
   def charge_sign
     if @senior.workers.present?
       @senior.workers.each do |worker|
-        if @accident.update_attributes(charge_sign: worker.sign_name)
+        if @accident.update(charge_sign: worker.sign_name)
           flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの担当印を押下しました。"
         end
       end
@@ -126,7 +126,7 @@ class AccidentsController < ApplicationController
 
   #担当印キャンセル
   def reset_charge_sign
-    if @accident.update_attributes(charge_sign: nil)
+    if @accident.update(charge_sign: nil)
       flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの担当印をキャンセルしました。"
     end
     if @senior.floor2
@@ -144,17 +144,17 @@ class AccidentsController < ApplicationController
     chief_3f = Worker.chief_3f[0]
     chief_4f = Worker.chief_4f[0]
     if chief_judgment(@accident.floor2, chief_2f)
-      if @accident.update_attributes(superior_d: chief_2f.sign_name)
+      if @accident.update(superior_d: chief_2f.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの２階係長印を押下しました。"
         redirect_to @facility
       end
     elsif chief_judgment(@accident.floor3, chief_3f)
-      if @accident.update_attributes(superior_e: chief_3f.sign_name)
+      if @accident.update(superior_e: chief_3f.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの３階係長印を押下しました。"
         redirect_to show_3f_facility_url(current_facility)
       end
     elsif chief_judgment(@accident.floor4, chief_4f)
-      if @accident.update_attributes(superior_f: chief_4f.sign_name)
+      if @accident.update(superior_f: chief_4f.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの４階係長印を押下しました。"
         redirect_to show_4f_facility_url(current_facility)
       end
@@ -173,17 +173,17 @@ class AccidentsController < ApplicationController
   #担当係長印キャンセル
   def reset_chief_sign
     if chief_judgment(@accident.floor2, @accident.superior_d)
-      if @accident.update_attributes(superior_d: nil)
+      if @accident.update(superior_d: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの担当係長印をキャンセルしました。"
         redirect_to @facility
       end
     elsif chief_judgment(@accident.floor3, @accident.superior_e)
-      if @accident.update_attributes(superior_e: nil)
+      if @accident.update(superior_e: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの担当係長印をキャンセルしました。"
         redirect_to show_3f_facility_url(current_facility)
       end
     elsif chief_judgment(@accident.floor4, @accident.superior_f)
-      if @accident.update_attributes(superior_f: nil)
+      if @accident.update(superior_f: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの担当係長印をキャンセルしました。"
         redirect_to show_4f_facility_url(current_facility)
       end
@@ -194,7 +194,7 @@ class AccidentsController < ApplicationController
   def risk_manager_sign
     risk_manager = Worker.where(position: "リスクマネジャー")[0]
     if risk_manager.present?
-      if @accident.update_attributes(superior_c: risk_manager.sign_name)
+      if @accident.update(superior_c: risk_manager.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんのリスクマネジャー印を押下しました。"
         if @senior.floor2
           redirect_to @facility
@@ -219,7 +219,7 @@ class AccidentsController < ApplicationController
   #リスマネ印キャンセル
   def reset_risk_manager_sign
     if @accident.superior_c.present?
-      if @accident.update_attributes(superior_c: nil)
+      if @accident.update(superior_c: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんのリスクマネジャー印をキャンセルしました。"
         if @senior.floor2
           redirect_to @facility
@@ -236,7 +236,7 @@ class AccidentsController < ApplicationController
   def director_sign
     director = Worker.where(position: "次長")[0]
     if director.present?
-      if @accident.update_attributes(superior_b: director.sign_name)
+      if @accident.update(superior_b: director.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの次長印を押下しました。"
         if @senior.floor2
           redirect_to @facility
@@ -261,7 +261,7 @@ class AccidentsController < ApplicationController
   #次長印キャンセル
   def reset_director_sign
     if @accident.superior_b.present?
-      if @accident.update_attributes(superior_b: nil)
+      if @accident.update(superior_b: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの次長印をキャンセルしました。"
         if @senior.floor2
           redirect_to @facility
@@ -278,7 +278,7 @@ class AccidentsController < ApplicationController
   def facility_manager_sign
     manager = Worker.where(position: "施設長")[0]
     if manager.present?
-      if @accident.update_attributes(superior_a: manager.sign_name)
+      if @accident.update(superior_a: manager.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの施設長印を押下しました。"
         if @senior.floor2
           redirect_to @facility
@@ -303,7 +303,7 @@ class AccidentsController < ApplicationController
   #施設長印キャンセル
   def reset_facility_manager_sign
     if @accident.superior_a.present?
-      if @accident.update_attributes(superior_a: nil)
+      if @accident.update(superior_a: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの施設長印をキャンセルしました。"
         if @senior.floor2
           redirect_to @facility
@@ -322,17 +322,17 @@ class AccidentsController < ApplicationController
     chief_3f = Worker.chief_3f[0]
     chief_4f = Worker.chief_4f[0]
     if chief_judgment(@accident.floor2, chief_2f)
-      if @accident.update_attributes(superior_d_last: chief_2f.sign_name)
+      if @accident.update(superior_d_last: chief_2f.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終２階係長印を押下しました。"
         redirect_to @facility
       end
     elsif chief_judgment(@accident.floor3, chief_3f)
-      if @accident.update_attributes(superior_e_last: chief_3f.sign_name)
+      if @accident.update(superior_e_last: chief_3f.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終３階係長印を押下しました。"
         redirect_to show_3f_facility_url(current_facility)
       end
     elsif chief_judgment(@accident.floor4, chief_4f)
-      if @accident.update_attributes(superior_f_last: chief_4f.sign_name)
+      if @accident.update(superior_f_last: chief_4f.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終４階係長印を押下しました。"
         redirect_to show_4f_facility_url(current_facility)
       end
@@ -351,17 +351,17 @@ class AccidentsController < ApplicationController
   #最終担当係長印キャンセル
   def last_reset_chief_sign
     if chief_judgment(@accident.floor2, @accident.superior_d_last)
-      if @accident.update_attributes(superior_d_last: nil)
+      if @accident.update(superior_d_last: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終担当係長印をキャンセルしました。"
         redirect_to @facility
       end
     elsif chief_judgment(@accident.floor3, @accident.superior_e_last)
-      if @accident.update_attributes(superior_e_last: nil)
+      if @accident.update(superior_e_last: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終担当係長印をキャンセルしました。"
         redirect_to show_3f_facility_url(current_facility)
       end
     elsif chief_judgment(@accident.floor4, @accident.superior_f_last)
-      if @accident.update_attributes(superior_f_last: nil)
+      if @accident.update(superior_f_last: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終担当係長印をキャンセルしました。"
         redirect_to show_4f_facility_url(current_facility)
       end
@@ -372,7 +372,7 @@ class AccidentsController < ApplicationController
   def last_risk_manager_sign
     risk_manager = Worker.where(position: "リスクマネジャー")[0]
     if risk_manager.present?
-      if @accident.update_attributes(superior_c_last: risk_manager.sign_name)
+      if @accident.update(superior_c_last: risk_manager.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終リスクマネジャー印を押下しました。"
         if @senior.floor2
           redirect_to @facility
@@ -397,7 +397,7 @@ class AccidentsController < ApplicationController
   #最終リスマネ印キャンセル
   def last_reset_risk_manager_sign
     if @accident.superior_c_last.present?
-      if @accident.update_attributes(superior_c_last: nil)
+      if @accident.update(superior_c_last: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終リスクマネジャー印をキャンセルしました。"
         if @senior.floor2
           redirect_to @facility
@@ -414,7 +414,7 @@ class AccidentsController < ApplicationController
   def last_director_sign
     director = Worker.where(position: "次長")[0]
     if director.present?
-      if @accident.update_attributes(superior_b_last: director.sign_name)
+      if @accident.update(superior_b_last: director.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終次長印を押下しました。"
         if @senior.floor2
           redirect_to @facility
@@ -439,7 +439,7 @@ class AccidentsController < ApplicationController
   #最終次長印キャンセル
   def last_reset_director_sign
     if @accident.superior_b_last.present?
-      if @accident.update_attributes(superior_b_last: nil)
+      if @accident.update(superior_b_last: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終次長印をキャンセルしました。"
         if @senior.floor2
           redirect_to @facility
@@ -456,7 +456,7 @@ class AccidentsController < ApplicationController
   def last_facility_manager_sign
     manager = Worker.where(position: "施設長")[0]
     if manager.present?
-      if @accident.update_attributes(superior_a_last: manager.sign_name)
+      if @accident.update(superior_a_last: manager.sign_name)
         flash[:success] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終施設長印を押下しました。"
         if @senior.floor2
           redirect_to @facility
@@ -481,7 +481,7 @@ class AccidentsController < ApplicationController
   #最終施設長印キャンセル
   def last_reset_facility_manager
     if @accident.superior_a_last.present?
-      if @accident.update_attributes(superior_a_last: nil)
+      if @accident.update(superior_a_last: nil)
         flash[:warning] = "#{@accident.accident_datetime.strftime("%Y年%m月%d日")} &emsp; #{@senior.floor}階利用者「#{@senior.senior_name}」さんの最終施設長印をキャンセルしました。"
         if @senior.floor2
           redirect_to @facility
@@ -1507,4 +1507,3 @@ class AccidentsController < ApplicationController
       end
 
 end
-

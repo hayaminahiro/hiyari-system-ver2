@@ -44,7 +44,7 @@ class SeniorsController < ApplicationController
   #施設利用者情報編集
   def update_senior
     if senior_valid?((senior_params)[:senior_name], (senior_params)[:worker_ids])
-      @senior.update_attributes(senior_params)
+      @senior.update(senior_params)
       flash[:success] = "#{@senior.floor}階利用者「#{@senior.senior_name}」さんの情報を更新しました。ふりがなに全角空白と半角英数字を使用している場合は更新されません。"
     else
       flash[:danger] = "入力項目に誤りがあります。ふりがなに全角空白と半角英数字は使用できません。担当職員は最大２名までです。"
@@ -54,7 +54,7 @@ class SeniorsController < ApplicationController
 
   #施設利用者退所ボタン
   def leaving
-    if @senior.update_attributes(using_flg: false)
+    if @senior.update(using_flg: false)
       flash[:warning] = "#{@senior.floor}階利用者「#{@senior.senior_name}」さんを退所へ変更しました。退職者一覧を確認して下さい。"
     end
     redirect_to facility_seniors_url
@@ -62,7 +62,7 @@ class SeniorsController < ApplicationController
 
   #施設利用者再入所ボタン
   def re_entry
-    if @senior.update_attributes(using_flg: true)
+    if @senior.update(using_flg: true)
       flash[:success] = "利用者「#{@senior.senior_name}」さんを再入所へ変更しました。#{@senior.floor}階を確認して下さい。"
     end
     redirect_to facility_seniors_url

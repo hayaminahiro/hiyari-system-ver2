@@ -57,7 +57,7 @@ class FacilitiesController < ApplicationController
 
   def update
     if password_valid?
-      if @facility.update_attributes(facility_params)
+      if @facility.update(facility_params)
         flash[:success] = "「#{@facility.name}」の施設情報を更新しました。"
         redirect_to @facility
       else
@@ -85,11 +85,11 @@ class FacilitiesController < ApplicationController
       redirect_to authenticator_request_facility_url
     elsif @facility.authenticate(password_params[:password])
       if @facility.account_delete?
-        @facility.update_attributes(account_delete: false)
+        @facility.update(account_delete: false)
         flash[:info] = "施設アカウント削除申請を取り消しました。"
         redirect_to destroy_account_facility_url
       else
-        @facility.update_attributes(account_delete: true)
+        @facility.update(account_delete: true)
         flash[:warning] = "施設アカウントの削除申請をしました。"
         redirect_to destroy_account_facility_url
       end
@@ -103,7 +103,7 @@ class FacilitiesController < ApplicationController
   end
 
   def update_facility_info
-    if @facility.update_attributes(facility_params)
+    if @facility.update(facility_params)
       flash[:success] = "「#{@facility.name}」の施設情報を更新しました。"
     else
       flash[:danger] = "施設情報の更新は失敗しました<br>" + @facility.errors.full_messages.join("<br>")
@@ -116,12 +116,12 @@ class FacilitiesController < ApplicationController
 
   def update_authenticator
     if @facility.display?
-      if @facility.update_attributes(display: false)
+      if @facility.update(display: false)
         flash[:success] = "「#{@facility.name}」さんの二段階認証QRコードを非表示にしました。"
       end
       redirect_to facilities_path
     else
-      if @facility.update_attributes(display: true)
+      if @facility.update(display: true)
         flash[:info] = "「#{@facility.name}」さんの二段階認証QRコードを表示しました。"
       end
       redirect_to facilities_path
@@ -133,12 +133,12 @@ class FacilitiesController < ApplicationController
 
   def update_authenticator_valid
     if @facility.authenticator_check?
-      if @facility.update_attributes(authenticator_check: false, authenticator_request: false)
+      if @facility.update(authenticator_check: false, authenticator_request: false)
         flash[:success] = "「#{@facility.name}」さんの二段階認証を有効にしました。"
       end
       redirect_to facilities_path
     else
-      if @facility.update_attributes(authenticator_check: true, authenticator_request: false)
+      if @facility.update(authenticator_check: true, authenticator_request: false)
         flash[:success] = "「#{@facility.name}」さんの二段階認証を無効にしました。"
       end
       redirect_to facilities_path
@@ -156,22 +156,22 @@ class FacilitiesController < ApplicationController
       if @facility.authenticator_check? # 二段階認証がtrue(無効)の場合の処理
         # 申請中(開始or中止)authenticator_request == true
         if @facility.authenticator_request?
-          @facility.update_attributes(authenticator_request: false)
+          @facility.update(authenticator_request: false)
           flash[:info] = "二段階認証開始の申請を取り消しました。"
           redirect_to authenticator_request_facility_url
         else
-          @facility.update_attributes(authenticator_request: true)
+          @facility.update(authenticator_request: true)
           flash[:info] = "二段階認証開始の申請をしました。"
           redirect_to authenticator_request_facility_url
         end
       else # 二段階認証がfalse(有効)の場合の処理
         if @facility.authenticator_request?
           # 申請中(開始or中止)authenticator_request == true
-          @facility.update_attributes(authenticator_request: false)
+          @facility.update(authenticator_request: false)
           flash[:success] = "二段階認証利用中止の申請を取り消しました。"
           redirect_to authenticator_request_facility_url
         else
-          @facility.update_attributes(authenticator_request: true)
+          @facility.update(authenticator_request: true)
           flash[:success] = "二段階認証利用中止の申請をしました。"
           redirect_to authenticator_request_facility_url
         end
