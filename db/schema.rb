@@ -10,18 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2020_06_15_004423) do
+ActiveRecord::Schema.define(version: 2020_06_15_004423) do
+
   create_table "accidents", force: :cascade do |t|
     t.string "which_accident"
     t.string "reporter"
-    t.datetime "accident_datetime", precision: nil
+    t.datetime "accident_datetime"
     t.string "accident_senior"
     t.string "accident_scene"
     t.integer "senior_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "accident_floor"
-    t.datetime "accident_time", precision: nil
+    t.datetime "accident_time"
     t.string "department"
     t.string "accident_worker"
     t.string "accident_place"
@@ -34,12 +35,12 @@ ActiveRecord::Schema[7.0].define(version: 2020_06_15_004423) do
     t.string "result_comment"
     t.string "measures_comment"
     t.string "change_measures"
-    t.datetime "evaluation_date", precision: nil
+    t.datetime "evaluation_date"
     t.string "evaluation_comment"
     t.integer "measures_result"
     t.string "superior_comment"
-    t.datetime "reporting_date", precision: nil
-    t.datetime "last_reporting_date", precision: nil
+    t.datetime "reporting_date"
+    t.datetime "last_reporting_date"
     t.string "superior_a"
     t.string "superior_b"
     t.string "superior_c"
@@ -81,8 +82,8 @@ ActiveRecord::Schema[7.0].define(version: 2020_06_15_004423) do
   create_table "facilities", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "password_digest"
     t.string "remember_digest"
     t.boolean "admin", default: false
@@ -90,7 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2020_06_15_004423) do
     t.string "provider"
     t.string "image"
     t.string "oauth_token"
-    t.datetime "oauth_expires_at", precision: nil
+    t.datetime "oauth_expires_at"
     t.string "salt"
     t.string "google_secret"
     t.boolean "display", default: true
@@ -103,8 +104,8 @@ ActiveRecord::Schema[7.0].define(version: 2020_06_15_004423) do
   create_table "senior_workers", force: :cascade do |t|
     t.integer "worker_id"
     t.integer "senior_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["senior_id"], name: "index_senior_workers_on_senior_id"
     t.index ["worker_id"], name: "index_senior_workers_on_worker_id"
   end
@@ -115,8 +116,8 @@ ActiveRecord::Schema[7.0].define(version: 2020_06_15_004423) do
     t.string "charge_worker"
     t.boolean "using_flg", default: true
     t.integer "facility_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "senior_name_call"
     t.index ["facility_id"], name: "index_seniors_on_facility_id"
   end
@@ -129,8 +130,8 @@ ActiveRecord::Schema[7.0].define(version: 2020_06_15_004423) do
     t.string "charge_senior"
     t.boolean "working_flg", default: true
     t.integer "facility_id"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "position"
     t.index ["facility_id"], name: "index_workers_on_facility_id"
   end
