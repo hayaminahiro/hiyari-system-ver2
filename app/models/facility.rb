@@ -2,6 +2,9 @@ class Facility < ApplicationRecord
   has_many :seniors, dependent: :destroy
   has_many :workers, dependent: :destroy
 
+  include FriendlyId
+  friendly_id :name
+
   acts_as_google_authenticated lookup_token: :salt, drift: 60, issuer: 'ヒヤリ管理システム'
   before_save {|record| record.salt = SecureRandom.hex unless record.salt }
   after_create {|record| record.set_google_secret }

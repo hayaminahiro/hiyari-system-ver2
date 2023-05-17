@@ -121,6 +121,8 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
     ffi (1.15.5)
+    friendly_id (5.5.0)
+      activerecord (>= 4.0.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
     google-authenticator-rails (3.2.1)
@@ -323,6 +325,7 @@ DEPENDENCIES
   byebug (= 9.0.6)
   coffee-rails (= 4.2.2)
   dotenv-rails
+  friendly_id
   google-authenticator-rails
   jbuilder (= 2.6.4)
   jquery-rails (= 4.3.1)

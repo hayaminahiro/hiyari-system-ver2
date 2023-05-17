@@ -18,12 +18,12 @@ class ApplicationController < ActionController::Base
 
   # paramsハッシュから施設ユーザーを取得します。
   def set_facility
-    @facility = Facility.find(params[:id])
+    @facility = Facility.friendly.find(params[:id])
   end
 
   #facility_idを取得
   def set_facility_id
-    @facility = Facility.find(params[:facility_id])
+    @facility = Facility.friendly.find(params[:facility_id])
   end
 
   #senior_idを取得

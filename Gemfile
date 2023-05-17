@@ -4,6 +4,7 @@ ruby "3.1.2"
 
 gem "rails",           "6.1.5"
 # gem "pg", "1.5.3"
+gem 'friendly_id'
 gem 'rails-i18n', '7.0.6'
 gem 'rounding', '~> 1.0', '>= 1.0.1'
 gem 'roo'
